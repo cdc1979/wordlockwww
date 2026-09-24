@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#188cda">
+  <meta name="description" content="Word Lock is a colorful word puzzle game. Spin letter reels, solve clues, climb word ladders, and uncover every hidden word.">
+  <title>Word Lock — Spin the letters. Unlock the word.</title>
+  <link rel="icon" type="image/png" href="assets/hero_lock.png">
+  <style>
+    @font-face{font-family:Lilita;src:url("assets/LilitaOne-Regular.ttf") format("truetype");font-display:swap}
+    :root{color-scheme:light;--ink:#21334f;--blue:#0756a8;--cream:#fff8e9;--gold:#ffc94b;--green:#27bd35;--shadow:0 13px 0 #c58f52,0 24px 35px #174b7470}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:#b8e9ff}
+    a{color:inherit}
+    a:focus-visible{outline:4px solid #ffcf46;outline-offset:5px}
+    .page{min-height:100vh;overflow:hidden;background:linear-gradient(#45b2fb20,#f7e5bb 850px),url("assets/menu_background.png") center top/auto 900px no-repeat,#f8dfb6}
+    .wrap{width:min(1120px,calc(100% - 36px));margin:auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0}
+    .brand{display:inline-flex;align-items:center;text-decoration:none}
+    .brand img{width:170px;height:auto;filter:drop-shadow(0 5px 3px #065aa666)}
+    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    nav a{font-family:Lilita,Arial,sans-serif;text-decoration:none;font-size:18px;padding:11px 20px;border-radius:999px;background:#fffaf0e8;border:2px solid #fff;box-shadow:0 5px 0 #a67742;color:#15477b}
+    nav a:hover{transform:translateY(2px);box-shadow:0 3px 0 #a67742}
+    .hero{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:34px;min-height:610px;padding:40px 0 85px}
+    .hero-copy{background:#fffaf0ed;border:5px solid #fff;border-radius:36px;padding:38px 42px 42px;box-shadow:var(--shadow)}
+    .eyebrow{font:20px Lilita,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#bd6c18;margin:0 0 10px}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{font-family:Lilita,Arial,sans-serif;font-weight:400}
+    h1{font-size:clamp(48px,6.2vw,83px);line-height:.98;color:#095db6;text-shadow:2px 3px 0 #c7eaff;margin-bottom:20px}
+    .hero-copy>p:not(.eyebrow){font-size:20px;line-height:1.52;max-width:30em}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:13px 30px;background:linear-gradient(#77ee51,#1abc31 60%,#0c9725);border:3px solid #e7ffa8;border-radius:999px;box-shadow:0 7px 0 #096b30,0 12px 14px #173a4d55;color:#fff;text-decoration:none;text-shadow:0 2px 1px #0d7138;font:25px Lilita,Arial,sans-serif;transition:transform .15s,box-shadow .15s}
+    .button:hover{transform:translateY(3px);box-shadow:0 4px 0 #096b30,0 7px 12px #173a4d55}
+    .hero-art{display:flex;justify-content:center;position:relative}
+    .hero-art:before{content:"";position:absolute;inset:7% 4% 3%;border-radius:50%;background:#fff7c9a6;filter:blur(38px)}
+    .hero-art img{position:relative;display:block;width:min(100%,360px);border:9px solid #fff6dd;border-radius:35px;box-shadow:0 14px 0 #ad7b40,0 30px 40px #0640688a;transform:rotate(3deg)}
+    main{padding-bottom:60px}
+    section{scroll-margin-top:20px}
+    .section-card{background:#fff8e9;border:5px solid #fff;border-radius:36px;box-shadow:var(--shadow);padding:36px;margin-bottom:54px}
+    .section-card h2,.modes h2{font-size:clamp(35px,4vw,52px);color:#075aa8;text-align:center;margin-bottom:10px}
+    .section-intro{text-align:center;font-size:18px;line-height:1.5;max-width:720px;margin:0 auto 30px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .step{background:#fff;border:3px solid #f2d8ad;border-radius:24px;padding:24px;text-align:center}
+    .step-number{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(#fff2ad,#ffbd36);border:3px solid #d9871f;box-shadow:0 4px 0 #a96618;font:29px Lilita,Arial,sans-serif;color:#76430a}
+    .step h3{font-size:25px;color:#0b5dab;margin-bottom:8px}
+    .step p{font-size:16px;line-height:1.5;margin:0}
+    .reels{display:flex;justify-content:center;gap:10px;margin:28px auto 2px}
+    .reels span{display:grid;place-items:center;width:64px;height:76px;border-radius:14px;border:5px solid #d8942f;background:linear-gradient(#fffef8 7%,#fff2db 40%,#ffdc78 49%,#ffba27 52%,#fff2dc 61%,#fffef8);box-shadow:inset 0 0 0 2px #fff7bc,0 5px 0 #9d5918;color:#173664;font:44px Lilita,Arial,sans-serif}
+    .modes{margin-bottom:54px}
+    .modes h2{margin-bottom:24px;text-shadow:0 2px 0 #fff}
+    .mode-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .mode{min-height:225px;border-radius:27px;padding:25px 21px 22px;color:#fff;border:4px solid #ffffffbd;box-shadow:0 9px 0 #19577b52,0 17px 25px #19436245;text-shadow:0 2px 1px #19395f55}
+    .mode:nth-child(1){background:linear-gradient(145deg,#53e557,#0ca731)}
+    .mode:nth-child(2){background:linear-gradient(145deg,#50dadd,#0798a9)}
+    .mode:nth-child(3){background:linear-gradient(145deg,#5ab4ff,#1262c8)}
+    .mode:nth-child(4){background:linear-gradient(145deg,#ffc367,#e37519)}
+    .mode .symbol{font:48px Lilita,Arial,sans-serif;line-height:1;margin-bottom:15px}
+    .mode h3{font-size:28px;margin-bottom:8px}
+    .mode p{line-height:1.4;font-size:16px;margin:0}
+    .daily{display:flex;align-items:center;gap:22px;padding:28px 34px;border-radius:29px;background:linear-gradient(120deg,#a352e5,#6523b4);border:4px solid #e9caff;box-shadow:0 9px 0 #491486,0 18px 25px #32255d50;color:#fff;margin-bottom:55px}
+    .daily .badge{font-size:52px;line-height:1}
+    .daily h2{font-size:33px;margin-bottom:6px}
+    .daily p{line-height:1.45;font-size:17px;margin:0}
+    .privacy-note{text-align:center;font-size:18px;margin:0 0 30px}
+    .privacy-note a{color:#064c99;font-weight:bold}
+    footer{background:#10497c;color:#fff;text-align:center;padding:26px 18px;font-size:15px}
+    footer a{color:#fff;margin-left:12px}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:35px;padding-top:24px}.hero-art img{width:min(70%,300px)}.mode-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.page{background-size:auto 760px}.brand img{width:135px}nav a{font-size:15px;padding:9px 12px}.hero{padding-bottom:65px}.hero-copy{padding:27px}.hero-copy>p:not(.eyebrow){font-size:18px}.hero-art img{width:min(65%,220px)}.section-card{padding:25px 18px}.steps,.mode-grid{grid-template-columns:1fr}.mode{min-height:unset}.daily{align-items:flex-start;padding:24px}.daily .badge{font-size:38px}.reels span{width:55px;height:68px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <header>
+        <a class="brand" href="index.html" aria-label="Word Lock home"><img src="assets/logo.png" alt="Word Lock"></a>
+        <nav aria-label="Main navigation"><a href="#how-to-play">How to play</a><a href="privacy.html">Privacy</a></nav>
+      </header>
+      <main>
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">A colorful word puzzle adventure</p>
+            <h1>Spin the letters.<br>Unlock the word.</h1>
+            <p>Turn the letter reels, follow the clue, and find the word that opens the lock. Each puzzle brings a fresh little challenge.</p>
+            <a class="button" href="#how-to-play">See how it works ↓</a>
+          </div>
+          <div class="hero-art"><img src="assets/gameplay.png" alt="Word Lock game screen showing three letter reels and a partially hidden word" width="390" height="844"></div>
+        </div>
+        <section class="section-card" id="how-to-play" aria-labelledby="how-title">
+          <h2 id="how-title">How to play</h2>
+          <p class="section-intro">A few quick turns can turn a mystery into a word.</p>
+          <div class="steps">
+            <div class="step"><span class="step-number">1</span><h3>Read the puzzle</h3><p>Look at the word with missing letters, or read the clue for the answer.</p></div>
+            <div class="step"><span class="step-number">2</span><h3>Spin the reels</h3><p>Swipe each letter reel up or down until the highlighted letters spell your guess.</p></div>
+            <div class="step"><span class="step-number">3</span><h3>Press CHECK</h3><p>Correct letters lock in gold. Adjust the rest and try again to complete the word.</p></div>
+          </div>
+          <div class="reels" aria-label="Example answer: CAT"><span>C</span><span>A</span><span>T</span></div>
+        </section>
+        <section class="modes" aria-labelledby="modes-title">
+          <h2 id="modes-title">Four ways to play</h2>
+          <div class="mode-grid">
+            <div class="mode"><div class="symbol" aria-hidden="true">🔒</div><h3>Word Lock</h3><p>Complete the partly hidden word and lock every correct letter in place.</p></div>
+            <div class="mode"><div class="symbol" aria-hidden="true">↗</div><h3>Word Ladder</h3><p>Change one letter at a time to build a path of four new words.</p></div>
+            <div class="mode"><div class="symbol" aria-hidden="true">✦</div><h3>Word Search</h3><p>Find every word the letter reels can make.</p></div>
+            <div class="mode"><div class="symbol" aria-hidden="true">?</div><h3>Clue Lock</h3><p>Solve the clue, then spin the reels to reveal its answer.</p></div>
+          </div>
+        </section>
+        <section class="daily" aria-labelledby="daily-title"><div class="badge" aria-hidden="true">★</div><div><h2 id="daily-title">Come back for the Daily Puzzle</h2><p>A new six-letter challenge arrives each day. Earn stars and coins as you solve, then unlock more letter reels as you progress.</p></div></section>
+        <p class="privacy-note">Your progress stays on your device. <a href="privacy.html">Read the privacy policy</a>.</p>
+      </main>
+    </div>
+    <footer>© 2026 Word Lock <a href="privacy.html">Privacy policy</a></footer>
+  </div>
+</body>
+</html>
